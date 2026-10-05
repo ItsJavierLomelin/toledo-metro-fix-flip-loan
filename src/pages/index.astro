@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import CityContent from '../components/CityContent.astro';
+import {brand,domain,cities} from '../data/cities';
+const title='Fix and Flip Loans in Greater Toledo, OH | Toledo Metro Fix & Flip Loan';
+const description='We connect Toledo, Sylvania, Maumee and Perrysburg area investors with fix and flip funding sources. Funding within 48 hours. Tell us your goal.';
+const businessId=`https://${domain}/#business`;
+const faq=[{q:'Are you a direct lender?',a:'No. We are connectors. We introduce investors to funding sources, and the funding source determines eligibility and terms.'},{q:'Does submitting guarantee funding?',a:'No. A submission starts a review, not an approval or commitment.'}];
+const areas=cities.map(c=>({'@type':'City',name:c.name,containedInPlace:{'@type':'State',name:'Ohio'}}));
+const jsonld=[{'@context':'https://schema.org','@type':'WebSite',name:brand,url:`https://${domain}/`},{'@context':'https://schema.org','@type':'FinancialService','@id':businessId,name:brand,url:`https://${domain}/`,areaServed:areas,description:'Fix and flip funding connections for real estate investors across Toledo, Sylvania, Maumee, Perrysburg, Oregon and the surrounding Lucas and Wood county area. Not a direct lender.'},{'@context':'https://schema.org','@type':'Service',serviceType:'Fix and flip funding connection service',provider:{'@id':businessId},areaServed:areas},{'@context':'https://schema.org','@type':'FAQPage',mainEntity:faq.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))}];
+---
+<Base title={title} description={description} path="/" jsonld={jsonld}><Header/><main><CityContent cityName="Toledo Metro" location="Homepage" intro="Greater Toledo has Victorian mansions in the Old West End, bungalows and Cape Cods across the city, and suburban colonials in Sylvania, Maumee and Perrysburg. Tell us about the home, the work you plan and how you expect to sell. We are connectors, and we introduce your project to funding sources for funding within 48 hours." angle="An Old West End Victorian, a Point Place cottage and a Perrysburg colonial call for very different scopes and sell to very different buyers. Start with the real condition of the house, the work you plan and recent sales on the same street." caution="Toledo sits on the old Great Black Swamp, so basement water and heavy clay are common. Check drainage, the foundation and pre-1978 lead paint before you rely on a budget, and tell us what you have confirmed." showCityGrid={true}/></main><Footer/></Base>
